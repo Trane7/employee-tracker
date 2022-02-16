@@ -1,31 +1,27 @@
--- CREATE DATABASE AND TABLES ===========================
-DROP DATABASE IF EXISTS employees_db;
+DROP DATABASE IF EXISTS nodejs_employee_tracker;
+CREATE DATABASE nodejs_employee_tracker;
+USE nodejs_employee_tracker;
 
-CREATE DATABASE employees_db;
-USE employees_db;
-
--- EMPLOYEES TABLE ======================================
-
-CREATE TABLE employees (
-  id INT(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,
-  firstName VARCHAR (30),
-  lastName VARCHAR (30),
-  roleID INT,
-  managerID INT
+CREATE TABLE departments(
+    id INTEGER AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(30) NOT NULL 
 );
 
--- ROLE TABLE ======================================
-
-CREATE TABLE role (
-  id INT(11) AUTO_INCREMENT PRIMARY KEY,
-  title VARCHAR (30),
-  salary DECIMAL(9,2),
-  departmentID INT
+CREATE TABLE employees(
+    id INTEGER AUTO_INCREMENT PRIMARY KEY,
+    first_name VARCHAR(30) NOT NULL,
+    last_name VARCHAR(30) NOT NULL,
+    manager_id INTEGER,
+    CONSTRAINT fk_manager FOREIGN KEY (manager_id) REFERENCES employees(id) ON DELETE SET NULL,
+    role_id INTEGER,
+    is_manager BOOLEAN NOT NULL,
+    CONSTRAINT fk_role FOREIGN KEY (role_id) REFERENCES roles(id) ON DELETE CASCADE
 );
 
--- DEPARTMENT TABLE ======================================
-
-CREATE TABLE department (
-  id INT(11) PRIMARY KEY,
-  name VARCHAR (30)
+CREATE TABLE roles(
+    id INTEGER AUTO_INCREMENT PRIMARY KEY,
+    title VARCHAR(30) NOT NULL,
+    salary VARCHAR(15) NOT NULL,
+    department_id INTEGER,
+    CONSTRAINT fk_department FOREIGN KEY (department_id) REFERENCES departments(id) ON DELETE CASCADE
 );
