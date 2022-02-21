@@ -16,8 +16,8 @@ VALUE
 
 INSERT INTO employee (first_name, last_name, role_id, manager_id)
 VALUE 
-("Happy", "Hogan", 1, 3), 
 ("Anton", "Vanko", 1, 1), 
 ("Tony", "Stark", 3, 2), 
 ("Steve", "Quinn", 5, 2), 
-("Pepper", "Potts", 5, 2);
+("Pepper", "Potts", 5, 2),
+("Happy", "Hogan", 1, 3);

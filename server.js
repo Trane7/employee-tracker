@@ -20,7 +20,7 @@ const initializeApp = async () => {
   const answers = await inquirer.prompt({
     type: "list",
     name: "opening",
-    message: "What would you like to do?",
+    message: "Please choose an option from the list below:",
     choices: openingChoices,
     pageSize: 5,
   })
