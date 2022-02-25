@@ -1,34 +1,20 @@
 const inquirer = require("inquirer");
-const mysql = require("mysql");
 const cTable = require("console.table");
+const connection = require("./db/connection")
 
-// connection and connection id
-const connection = mysql.createConnection({
-  host: "localhost",
-  port: 3306,
-  user: "root",
-  password: "password",
-  database: "employee_trackerDB",
-});
 
-connection.connect(function (err) {
-  if (err) throw err;
-  console.log("Connected as Id" + connection.threadId);
-  startPrompt();
-});
-
-//================== Beginning Prompt =======================//
+// Beginning Prompt //
 function startPrompt() {
   inquirer
     .prompt([
       {
         type: "list",
-        message: "What would you like to do?",
+        message: "Please choose from the list below:",
         name: "choice",
         choices: [
           "View All Employees?",
           "View All Employee's By Roles?",
-          "View all Emplyees By Deparments",
+          "View All Employee's By Deparments?",
           "Update Employee",
           "Add Employee?",
           "Add Role?",
@@ -45,7 +31,7 @@ function startPrompt() {
         case "View All Employee's By Roles?":
           viewAllRoles();
           break;
-        case "View all Emplyees By Deparments":
+        case "View all Employee's By Deparments?":
           viewAllDepartments();
           break;
 
@@ -71,7 +57,7 @@ function startPrompt() {
 // All Employees //
 function viewAllEmployees() {
   connection.query(
-    "SELECT employee.first_name, employee.last_name, role.title, role.salary, department.name, CONCAT(e.first_name, ' ' ,e.last_name) AS Manager FROM employee INNER JOIN role on role.id = employee.role_id INNER JOIN department on department.id = role.department_id left join employee e on employee.manager_id = e.id;",
+    "SELECT employee.first_name, employee.last_name, role.Title, role.Salary, department.Name, CONCAT(e.first_name, ' ' ,e.last_name) AS Manager FROM employee INNER JOIN role on role.id = employee.role_id INNER JOIN department on department.id = role.department_id left join employee e on employee.manager_id = e.id;",
     function (err, res) {
       if (err) throw err;
       console.table(res);
@@ -95,7 +81,7 @@ function viewAllRoles() {
 // View All Employees By Departments //
 function viewAllDepartments() {
   connection.query(
-    "SELECT employee.first_name, employee.last_name, department.name AS Department FROM employee JOIN role ON employee.role_id = role.id JOIN department ON role.department_id = department.id ORDER BY employee.id;",
+    "SELECT employee.first_name, employee.last_name, department.name AS Department FROM employee JOIN role ON employee.role_id = role.id JOIN Department ON role.department_id = department.id ORDER BY employee.id;",
     function (err, res) {
       if (err) throw err;
       console.table(res);
@@ -120,8 +106,7 @@ function selectRole() {
 var managersArr = [];
 function selectManager() {
   connection.query(
-    "SELECT first_name, last_name FROM employee WHERE manager_id IS NULL",
-    function (err, res) {
+    "SELECT first_name, last_name FROM employee WHERE employee.role_id", function (err, res) {
       if (err) throw err;
       for (var i = 0; i < res.length; i++) {
         managersArr.push(res[i].first_name);
@@ -154,7 +139,7 @@ function addEmployee() {
       {
         name: "choice",
         type: "rawlist",
-        message: "Whats their managers name?",
+        message: "Who's their managers name?",
         choices: selectManager(),
       },
     ])
@@ -188,7 +173,7 @@ function addRole() {
           {
             name: "Title",
             type: "input",
-            message: "What is the roles Title?",
+            message: "What is the roles?",
           },
           {
             name: "Salary",
@@ -288,3 +273,5 @@ function addDepartment() {
       );
     });
 }
+
+startPrompt()
