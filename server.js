@@ -19,6 +19,7 @@ function startPrompt() {
           "Add Employee?",
           "Add Role?",
           "Add Department?",
+          "Quit"
         ],
       },
     ])
@@ -51,8 +52,10 @@ function startPrompt() {
         case "Add Department?":
           addDepartment();
           break;
-        default:
+        case "Quit":
           quit();
+        default:
+          throw new Error("Never should see this message");
       }
     });
 }
@@ -258,13 +261,8 @@ function updateEmployee() {
         .then(function (val) {
           var roleId = selectRole().indexOf(val.role) + 1;
           connection.query(
-            "UPDATE employee SET WHERE ?",
-            {
-              last_name: val.lastName,
-            },
-            {
-              role_id: roleId,
-            },
+            "UPDATE employee SET employee.role_id = ? WHERE employee.last_name = ?",
+            [roleId, val.lastName],
             function (err) {
               if (err) throw err;
               console.table(val);
