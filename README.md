@@ -5,11 +5,6 @@
 Are you a manager that has a hard time keeping track of your employees? Well I have to solution for you, welcome to Employee Tracker! Built using MySQL and NodeJs, this database can adapt and handle the growth of your company! You will be able to add, delete, and modify each employee and what departments/titles they have within your buisness! Below you will find how to access and use this helpful app!
 
 
-## Screenshots!
-
-![main]()
-
-
 ## Getting Started
 
 ### Instructions:
@@ -17,7 +12,7 @@ In order to use this application you will need to first run an npm install in yo
 
 ## Demo Video 
 
-- [Link to Demo Video]() 
+- [Link to Demo Video](https://drive.google.com/file/d/1oqExUJdpGqbk9N1WY6fwyBWjE7sJIOpn/view) 
 
 ## Built With
 
@@ -27,7 +22,7 @@ In order to use this application you will need to first run an npm install in yo
 - Inquirer
 - Node.js
 
-
+## Links
 - [GitHub Repo: Trane7](https://trane7.github.io/employee-tracker)
 
 
