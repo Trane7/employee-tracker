@@ -23,7 +23,7 @@ In order to use this application you will need to first run an npm install in yo
 - Node.js
 
 ## Links
-- [GitHub Repo: Trane7](https://trane7.github.io/employee-tracker)
+- [GitHub Repo: Trane7](https://github.com/Trane7/employee-tracker)
 
 
 ## Contributors
