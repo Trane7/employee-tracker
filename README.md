@@ -29,5 +29,5 @@ In order to use this application you will need to first run an npm install in yo
 ## Contributors
 
 ### Demetre Growette:
-- [GitHub Repo: Trane7](https://github.com/Trane7)
+- [GitHub: Trane7](https://github.com/Trane7)
 
